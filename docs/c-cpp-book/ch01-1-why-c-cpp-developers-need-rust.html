@@ -1,0 +1,581 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Why C/C++ Developers Need Rust - Rust for C/C++ Programmers</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "ayu";
+            window.path_to_searchindex_js = "searchindex-a7170a72.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-a041bca1.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust for C/C++ Programmers</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/microsoft/RustTraining" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="why-cc-developers-need-rust"><a class="header" href="#why-cc-developers-need-rust">Why C/C++ Developers Need Rust</a></h1>
+<blockquote>
+<p><strong>What you’ll learn:</strong></p>
+<ul>
+<li>The full list of problems Rust eliminates — memory safety, undefined behavior, data races, and more</li>
+<li>Why <code>shared_ptr</code>, <code>unique_ptr</code>, and other C++ mitigations are bandaids, not solutions</li>
+<li>Concrete C and C++ vulnerability examples that are structurally impossible in safe Rust</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>Want to skip straight to code?</strong> Jump to <a href="ch02-getting-started.html#enough-talk-already-show-me-some-code">Show me some code</a></p>
+</blockquote>
+<h2 id="what-rust-eliminates--the-complete-list"><a class="header" href="#what-rust-eliminates--the-complete-list">What Rust Eliminates — The Complete List</a></h2>
+<p>Before diving into examples, here’s the executive summary. Safe Rust <strong>structurally prevents</strong> every issue in this list — not through discipline, tooling, or code review, but through the type system and compiler:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th><strong>Eliminated Issue</strong></th><th style="text-align: center"><strong>C</strong></th><th style="text-align: center"><strong>C++</strong></th><th><strong>How Rust Prevents It</strong></th></tr>
+</thead>
+<tbody>
+<tr><td>Buffer overflows / underflows</td><td style="text-align: center">✅</td><td style="text-align: center">✅</td><td>All arrays, slices, and strings carry bounds; indexing is checked at runtime</td></tr>
+<tr><td>Memory leaks (no GC needed)</td><td style="text-align: center">✅</td><td style="text-align: center">✅</td><td><code>Drop</code> trait = RAII done right; automatic cleanup, no Rule of Five</td></tr>
+<tr><td>Dangling pointers</td><td style="text-align: center">✅</td><td style="text-align: center">✅</td><td>Lifetime system proves references outlive their referent at compile time</td></tr>
+<tr><td>Use-after-free</td><td style="text-align: center">✅</td><td style="text-align: center">✅</td><td>Ownership system makes this a compile error</td></tr>
+<tr><td>Use-after-move</td><td style="text-align: center">—</td><td style="text-align: center">✅</td><td>Moves are <strong>destructive</strong> — the original binding ceases to exist</td></tr>
+<tr><td>Uninitialized variables</td><td style="text-align: center">✅</td><td style="text-align: center">✅</td><td>All variables must be initialized before use; compiler enforces it</td></tr>
+<tr><td>Integer overflow / underflow UB</td><td style="text-align: center">✅</td><td style="text-align: center">✅</td><td>Debug builds panic on overflow; release builds wrap (defined behavior either way)</td></tr>
+<tr><td>NULL pointer dereferences / SEGVs</td><td style="text-align: center">✅</td><td style="text-align: center">✅</td><td>No null pointers; <code>Option&lt;T&gt;</code> forces explicit handling</td></tr>
+<tr><td>Data races</td><td style="text-align: center">✅</td><td style="text-align: center">✅</td><td><code>Send</code>/<code>Sync</code> traits + borrow checker make data races a compile error</td></tr>
+<tr><td>Uncontrolled side-effects</td><td style="text-align: center">✅</td><td style="text-align: center">✅</td><td>Immutability by default; mutation requires explicit <code>mut</code></td></tr>
+<tr><td>No inheritance (better maintainability)</td><td style="text-align: center">—</td><td style="text-align: center">✅</td><td>Traits + composition replace class hierarchies; promotes reuse without coupling</td></tr>
+<tr><td>No exceptions; predictable control flow</td><td style="text-align: center">—</td><td style="text-align: center">✅</td><td>Errors are values (<code>Result&lt;T, E&gt;</code>); impossible to ignore, no hidden <code>throw</code> paths</td></tr>
+<tr><td>Iterator invalidation</td><td style="text-align: center">—</td><td style="text-align: center">✅</td><td>Borrow checker forbids mutating a collection while iterating</td></tr>
+<tr><td>Reference cycles / leaked finalizers</td><td style="text-align: center">—</td><td style="text-align: center">✅</td><td>Ownership is tree-shaped; <code>Rc</code> cycles are opt-in and catchable with <code>Weak</code></td></tr>
+<tr><td>No forgotten mutex unlocks</td><td style="text-align: center">✅</td><td style="text-align: center">✅</td><td><code>Mutex&lt;T&gt;</code> wraps the data; lock guard is the only way to access it</td></tr>
+<tr><td>Undefined behavior (general)</td><td style="text-align: center">✅</td><td style="text-align: center">✅</td><td>Safe Rust has <strong>zero</strong> undefined behavior; <code>unsafe</code> blocks are explicit and auditable</td></tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>Bottom line:</strong> These aren’t aspirational goals enforced by coding standards. They are <strong>compile-time guarantees</strong>. If your code compiles, these bugs cannot exist.</p>
+</blockquote>
+<hr>
+<h2 id="the-problems-shared-by-c-and-c"><a class="header" href="#the-problems-shared-by-c-and-c">The Problems Shared by C and C++</a></h2>
+<blockquote>
+<p><strong>Want to skip the examples?</strong> Jump to <a href="#how-rust-addresses-all-of-this">How Rust Addresses All of This</a> or straight to <a href="ch02-getting-started.html#enough-talk-already-show-me-some-code">Show me some code</a></p>
+</blockquote>
+<p>Both languages share a core set of memory safety problems that are the root cause of over 70% of CVEs (Common Vulnerabilities and Exposures):</p>
+<h3 id="buffer-overflows"><a class="header" href="#buffer-overflows">Buffer overflows</a></h3>
+<p>C arrays, pointers, and strings have no intrinsic bounds. It is trivially easy to exceed them:</p>
+<pre><code class="language-c">#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+void buffer_dangers() {
+    char buffer[10];
+    strcpy(buffer, "This string is way too long!");  // Buffer overflow
+
+    int arr[5] = {1, 2, 3, 4, 5};
+    int *ptr = arr;           // Loses size information
+    ptr[10] = 42;             // No bounds check — undefined behavior
+}
+</code></pre>
+<p>In C++, <code>std::vector::operator[]</code> still performs no bounds checking. Only <code>.at()</code> does — and who catches the exception?</p>
+<h3 id="dangling-pointers-and-use-after-free"><a class="header" href="#dangling-pointers-and-use-after-free">Dangling pointers and use-after-free</a></h3>
+<pre><code class="language-c">int *bar() {
+    int i = 42;
+    return &amp;i;    // Returns address of stack variable — dangling!
+}
+
+void use_after_free() {
+    char *p = (char *)malloc(20);
+    free(p);
+    *p = '\0';   // Use after free — undefined behavior
+}
+</code></pre>
+<h3 id="uninitialized-variables-and-undefined-behavior"><a class="header" href="#uninitialized-variables-and-undefined-behavior">Uninitialized variables and undefined behavior</a></h3>
+<p>C and C++ both allow uninitialized variables. The resulting values are indeterminate, and reading them is undefined behavior:</p>
+<pre><code class="language-c">int x;               // Uninitialized
+if (x &gt; 0) { ... }  // UB — x could be anything
+</code></pre>
+<p>Integer overflow is <strong>defined</strong> in C for unsigned types but <strong>undefined</strong> for signed types. In C++, signed overflow is also undefined behavior. Both compilers can and do exploit this for “optimizations” that break programs in surprising ways.</p>
+<h3 id="null-pointer-dereferences"><a class="header" href="#null-pointer-dereferences">NULL pointer dereferences</a></h3>
+<pre><code class="language-c">int *ptr = NULL;
+*ptr = 42;           // SEGV — but the compiler won't stop you
+</code></pre>
+<p>In C++, <code>std::optional&lt;T&gt;</code> helps but is verbose and often bypassed with <code>.value()</code> which throws.</p>
+<h3 id="the-visualization-shared-problems"><a class="header" href="#the-visualization-shared-problems">The visualization: shared problems</a></h3>
+<pre class="mermaid">graph TD
+    ROOT["C/C++ Memory Safety Issues"] --&gt; BUF["Buffer Overflows"]
+    ROOT --&gt; DANGLE["Dangling Pointers"]
+    ROOT --&gt; UAF["Use-After-Free"]
+    ROOT --&gt; UNINIT["Uninitialized Variables"]
+    ROOT --&gt; NULL["NULL Dereferences"]
+    ROOT --&gt; UB["Undefined Behavior"]
+    ROOT --&gt; RACE["Data Races"]
+
+    BUF --&gt; BUF1["No bounds on arrays/pointers"]
+    DANGLE --&gt; DANGLE1["Returning stack addresses"]
+    UAF --&gt; UAF1["Reusing freed memory"]
+    UNINIT --&gt; UNINIT1["Indeterminate values"]
+    NULL --&gt; NULL1["No forced null checks"]
+    UB --&gt; UB1["Signed overflow, aliasing"]
+    RACE --&gt; RACE1["No compile-time safety"]
+
+    style ROOT fill:#ff6b6b,color:#000
+    style BUF fill:#ffa07a,color:#000
+    style DANGLE fill:#ffa07a,color:#000
+    style UAF fill:#ffa07a,color:#000
+    style UNINIT fill:#ffa07a,color:#000
+    style NULL fill:#ffa07a,color:#000
+    style UB fill:#ffa07a,color:#000
+    style RACE fill:#ffa07a,color:#000
+</pre>
+
+<hr>
+<h2 id="c-adds-more-problems-on-top"><a class="header" href="#c-adds-more-problems-on-top">C++ Adds More Problems on Top</a></h2>
+<blockquote>
+<p><strong>C audience</strong>: You can <a href="#how-rust-addresses-all-of-this">skip ahead to How Rust Addresses These Issues</a> if you don’t use C++.</p>
+<p><strong>Want to skip straight to code?</strong> Jump to <a href="ch02-getting-started.html#enough-talk-already-show-me-some-code">Show me some code</a></p>
+</blockquote>
+<p>C++ introduced smart pointers, RAII, move semantics, and exceptions to address C’s problems. These are <strong>bandaids, not cures</strong> — they shift the failure mode from “crash at runtime” to “subtler bug at runtime”:</p>
+<h3 id="unique_ptr-and-shared_ptr--bandaids-not-solutions"><a class="header" href="#unique_ptr-and-shared_ptr--bandaids-not-solutions"><code>unique_ptr</code> and <code>shared_ptr</code> — bandaids, not solutions</a></h3>
+<p>C++ smart pointers are a significant improvement over raw <code>malloc</code>/<code>free</code>, but they don’t solve the underlying problems:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>C++ Mitigation</th><th>What It Fixes</th><th>What It <strong>Doesn’t</strong> Fix</th></tr>
+</thead>
+<tbody>
+<tr><td><code>std::unique_ptr</code></td><td>Prevents leaks via RAII</td><td><strong>Use-after-move</strong> still compiles; leaves a zombie nullptr</td></tr>
+<tr><td><code>std::shared_ptr</code></td><td>Shared ownership</td><td><strong>Reference cycles</strong> leak silently; <code>weak_ptr</code> discipline is manual</td></tr>
+<tr><td><code>std::optional</code></td><td>Replaces some null use</td><td><code>.value()</code> <strong>throws</strong> if empty — hidden control flow</td></tr>
+<tr><td><code>std::string_view</code></td><td>Avoids copies</td><td><strong>Dangling</strong> if the source string is freed — no lifetime checking</td></tr>
+<tr><td>Move semantics</td><td>Efficient transfers</td><td>Moved-from objects are in a <strong>“valid but unspecified state”</strong> — UB waiting to happen</td></tr>
+<tr><td>RAII</td><td>Automatic cleanup</td><td>Requires the <strong>Rule of Five</strong> to get right; one mistake breaks everything</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-cpp">// unique_ptr: use-after-move compiles cleanly
+std::unique_ptr&lt;int&gt; ptr = std::make_unique&lt;int&gt;(42);
+std::unique_ptr&lt;int&gt; ptr2 = std::move(ptr);
+std::cout &lt;&lt; *ptr;  // Compiles! Undefined behavior at runtime.
+                     // In Rust, this is a compile error: "value used after move"
+</code></pre>
+<pre><code class="language-cpp">// shared_ptr: reference cycles leak silently
+struct Node {
+    std::shared_ptr&lt;Node&gt; next;
+    std::shared_ptr&lt;Node&gt; parent;  // Cycle! Destructor never called.
+};
+auto a = std::make_shared&lt;Node&gt;();
+auto b = std::make_shared&lt;Node&gt;();
+a-&gt;next = b;
+b-&gt;parent = a;  // Memory leak — ref count never reaches 0
+                 // In Rust, Rc&lt;T&gt; + Weak&lt;T&gt; makes cycles explicit and breakable
+</code></pre>
+<h3 id="use-after-move--the-silent-killer"><a class="header" href="#use-after-move--the-silent-killer">Use-after-move — the silent killer</a></h3>
+<p>C++ <code>std::move</code> is not a move — it’s a cast. The original object remains in a “valid but unspecified state”. The compiler lets you keep using it:</p>
+<pre><code class="language-cpp">auto vec = std::make_unique&lt;std::vector&lt;int&gt;&gt;({1, 2, 3});
+auto vec2 = std::move(vec);
+vec-&gt;size();  // Compiles! But dereferencing nullptr — crash at runtime
+</code></pre>
+<p>In Rust, moves are <strong>destructive</strong>. The original binding is gone:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let vec = vec![1, 2, 3];
+let vec2 = vec;           // Move — vec is consumed
+// vec.len();             // Compile error: value used after move
+<span class="boring">}</span></code></pre>
+<h3 id="iterator-invalidation--real-bugs-from-production-c"><a class="header" href="#iterator-invalidation--real-bugs-from-production-c">Iterator invalidation — real bugs from production C++</a></h3>
+<p>These aren’t contrived examples — they represent <strong>real bug patterns</strong> found in large C++ codebases:</p>
+<pre><code class="language-cpp">// BUG 1: erase without reassigning iterator (undefined behavior)
+while (it != pending_faults.end()) {
+    if (*it != nullptr &amp;&amp; (*it)-&gt;GetId() == fault-&gt;GetId()) {
+        pending_faults.erase(it);   // ← iterator invalidated!
+        removed_count++;            //   next loop uses dangling iterator
+    } else {
+        ++it;
+    }
+}
+// Fix: it = pending_faults.erase(it);
+</code></pre>
+<pre><code class="language-cpp">// BUG 2: index-based erase skips elements
+for (auto i = 0; i &lt; entries.size(); i++) {
+    if (config_status == ConfigDisable::Status::Disabled) {
+        entries.erase(entries.begin() + i);  // ← shifts elements
+    }                                         //   i++ skips the shifted one
+}
+</code></pre>
+<pre><code class="language-cpp">// BUG 3: one erase path correct, the other isn't
+while (it != incomplete_ids.end()) {
+    if (current_action == nullptr) {
+        incomplete_ids.erase(it);  // ← BUG: iterator not reassigned
+        continue;
+    }
+    it = incomplete_ids.erase(it); // ← Correct path
+}
+</code></pre>
+<p><strong>These compile without any warning.</strong> In Rust, the borrow checker makes all three a compile error — you cannot mutate a collection while iterating over it, period.</p>
+<h3 id="exception-safety-and-the-dynamic_castnew-pattern"><a class="header" href="#exception-safety-and-the-dynamic_castnew-pattern">Exception safety and the <code>dynamic_cast</code>/<code>new</code> pattern</a></h3>
+<p>Modern C++ codebases still lean heavily on patterns that have no compile-time safety:</p>
+<pre><code class="language-cpp">// Typical C++ factory pattern — every branch is a potential bug
+DriverBase* driver = nullptr;
+if (dynamic_cast&lt;ModelA*&gt;(device)) {
+    driver = new DriverForModelA(framework);
+} else if (dynamic_cast&lt;ModelB*&gt;(device)) {
+    driver = new DriverForModelB(framework);
+}
+// What if driver is still nullptr? What if new throws? Who owns driver?
+</code></pre>
+<p>In a typical 100K-line C++ codebase you might find hundreds of <code>dynamic_cast</code> calls (each a potential runtime failure), hundreds of raw <code>new</code> calls (each a potential leak), and hundreds of <code>virtual</code>/<code>override</code> methods (vtable overhead everywhere).</p>
+<h3 id="dangling-references-and-lambda-captures"><a class="header" href="#dangling-references-and-lambda-captures">Dangling references and lambda captures</a></h3>
+<pre><code class="language-cpp">int&amp; get_reference() {
+    int x = 42;
+    return x;  // Dangling reference — compiles, UB at runtime
+}
+
+auto make_closure() {
+    int local = 42;
+    return [&amp;local]() { return local; };  // Dangling capture!
+}
+</code></pre>
+<h3 id="the-visualization-c-additional-problems"><a class="header" href="#the-visualization-c-additional-problems">The visualization: C++ additional problems</a></h3>
+<pre class="mermaid">graph TD
+    ROOT["C++ Additional Problems&lt;br/&gt;(on top of C issues)"] --&gt; UAM["Use-After-Move"]
+    ROOT --&gt; CYCLE["Reference Cycles"]
+    ROOT --&gt; ITER["Iterator Invalidation"]
+    ROOT --&gt; EXC["Exception Safety"]
+    ROOT --&gt; TMPL["Template Error Messages"]
+
+    UAM --&gt; UAM1["std::move leaves zombie&lt;br/&gt;Compiles without warning"]
+    CYCLE --&gt; CYCLE1["shared_ptr cycles leak&lt;br/&gt;Destructor never called"]
+    ITER --&gt; ITER1["erase() invalidates iterators&lt;br/&gt;Real production bugs"]
+    EXC --&gt; EXC1["Partial construction&lt;br/&gt;new without try/catch"]
+    TMPL --&gt; TMPL1["30+ lines of nested&lt;br/&gt;template instantiation errors"]
+
+    style ROOT fill:#ff6b6b,color:#000
+    style UAM fill:#ffa07a,color:#000
+    style CYCLE fill:#ffa07a,color:#000
+    style ITER fill:#ffa07a,color:#000
+    style EXC fill:#ffa07a,color:#000
+    style TMPL fill:#ffa07a,color:#000
+</pre>
+
+<hr>
+<h2 id="how-rust-addresses-all-of-this"><a class="header" href="#how-rust-addresses-all-of-this">How Rust Addresses All of This</a></h2>
+<p>Every problem listed above — from both C and C++ — is prevented by Rust’s compile-time guarantees:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Problem</th><th>Rust’s Solution</th></tr>
+</thead>
+<tbody>
+<tr><td>Buffer overflows</td><td>Slices carry length; indexing is bounds-checked</td></tr>
+<tr><td>Dangling pointers / use-after-free</td><td>Lifetime system proves references are valid at compile time</td></tr>
+<tr><td>Use-after-move</td><td>Moves are destructive — compiler refuses to let you touch the original</td></tr>
+<tr><td>Memory leaks</td><td><code>Drop</code> trait = RAII without the Rule of Five; automatic, correct cleanup</td></tr>
+<tr><td>Reference cycles</td><td>Ownership is tree-shaped; <code>Rc</code> + <code>Weak</code> makes cycles explicit</td></tr>
+<tr><td>Iterator invalidation</td><td>Borrow checker forbids mutating a collection while borrowing it</td></tr>
+<tr><td>NULL pointers</td><td>No null. <code>Option&lt;T&gt;</code> forces explicit handling via pattern matching</td></tr>
+<tr><td>Data races</td><td><code>Send</code>/<code>Sync</code> traits make data races a compile error</td></tr>
+<tr><td>Uninitialized variables</td><td>All variables must be initialized; compiler enforces it</td></tr>
+<tr><td>Integer UB</td><td>Debug panics on overflow; release wraps (both defined behavior)</td></tr>
+<tr><td>Exceptions</td><td>No exceptions; <code>Result&lt;T, E&gt;</code> is visible in type signatures, propagated with <code>?</code></td></tr>
+<tr><td>Inheritance complexity</td><td>Traits + composition; no Diamond Problem, no vtable fragility</td></tr>
+<tr><td>Forgotten mutex unlocks</td><td><code>Mutex&lt;T&gt;</code> wraps the data; lock guard is the only access path</td></tr>
+</tbody>
+</table>
+</div>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn rust_prevents_everything() {
+    // ✅ No buffer overflow — bounds checked
+    let arr = [1, 2, 3, 4, 5];
+    // arr[10];  // panic at runtime, never UB
+
+    // ✅ No use-after-move — compile error
+    let data = vec![1, 2, 3];
+    let moved = data;
+    // data.len();  // error: value used after move
+
+    // ✅ No dangling pointer — lifetime error
+    // let r;
+    // { let x = 5; r = &amp;x; }  // error: x does not live long enough
+
+    // ✅ No null — Option forces handling
+    let maybe: Option&lt;i32&gt; = None;
+    // maybe.unwrap();  // panic, but you'd use match or if let instead
+
+    // ✅ No data race — compile error
+    // let mut shared = vec![1, 2, 3];
+    // std::thread::spawn(|| shared.push(4));  // error: closure may outlive
+    // shared.push(5);                         //   borrowed value
+}
+<span class="boring">}</span></code></pre>
+<h3 id="rusts-safety-model--the-full-picture"><a class="header" href="#rusts-safety-model--the-full-picture">Rust’s safety model — the full picture</a></h3>
+<pre class="mermaid">graph TD
+    RUST["Rust Safety Guarantees"] --&gt; OWN["Ownership System"]
+    RUST --&gt; BORROW["Borrow Checker"]
+    RUST --&gt; TYPES["Type System"]
+    RUST --&gt; TRAITS["Send/Sync Traits"]
+
+    OWN --&gt; OWN1["No use-after-free&lt;br/&gt;No use-after-move&lt;br/&gt;No double-free"]
+    BORROW --&gt; BORROW1["No dangling references&lt;br/&gt;No iterator invalidation&lt;br/&gt;No data races through refs"]
+    TYPES --&gt; TYPES1["No NULL (Option&amp;lt;T&amp;gt;)&lt;br/&gt;No exceptions (Result&amp;lt;T,E&amp;gt;)&lt;br/&gt;No uninitialized values"]
+    TRAITS --&gt; TRAITS1["No data races&lt;br/&gt;Send = safe to transfer&lt;br/&gt;Sync = safe to share"]
+
+    style RUST fill:#51cf66,color:#000
+    style OWN fill:#91e5a3,color:#000
+    style BORROW fill:#91e5a3,color:#000
+    style TYPES fill:#91e5a3,color:#000
+    style TRAITS fill:#91e5a3,color:#000
+</pre>
+
+<h2 id="quick-reference-c-vs-c-vs-rust"><a class="header" href="#quick-reference-c-vs-c-vs-rust">Quick Reference: C vs C++ vs Rust</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th><strong>Concept</strong></th><th><strong>C</strong></th><th><strong>C++</strong></th><th><strong>Rust</strong></th><th><strong>Key Difference</strong></th></tr>
+</thead>
+<tbody>
+<tr><td>Memory management</td><td><code>malloc()/free()</code></td><td><code>unique_ptr</code>, <code>shared_ptr</code></td><td><code>Box&lt;T&gt;</code>, <code>Rc&lt;T&gt;</code>, <code>Arc&lt;T&gt;</code></td><td>Automatic, no cycles, no zombies</td></tr>
+<tr><td>Arrays</td><td><code>int arr[10]</code></td><td><code>std::vector&lt;T&gt;</code>, <code>std::array&lt;T&gt;</code></td><td><code>Vec&lt;T&gt;</code>, <code>[T; N]</code></td><td>Bounds checking by default</td></tr>
+<tr><td>Strings</td><td><code>char*</code> with <code>\0</code></td><td><code>std::string</code>, <code>string_view</code></td><td><code>String</code>, <code>&amp;str</code></td><td>UTF-8 guaranteed, lifetime-checked</td></tr>
+<tr><td>References</td><td><code>int*</code> (raw)</td><td><code>T&amp;</code>, <code>T&amp;&amp;</code> (move)</td><td><code>&amp;T</code>, <code>&amp;mut T</code></td><td>Lifetime + borrow checking</td></tr>
+<tr><td>Polymorphism</td><td>Function pointers</td><td>Virtual functions, inheritance</td><td>Traits, trait objects</td><td>Composition over inheritance</td></tr>
+<tr><td>Generics</td><td>Macros / <code>void*</code></td><td>Templates</td><td>Generics + trait bounds</td><td>Clear error messages</td></tr>
+<tr><td>Error handling</td><td>Return codes, <code>errno</code></td><td>Exceptions, <code>std::optional</code></td><td><code>Result&lt;T, E&gt;</code>, <code>Option&lt;T&gt;</code></td><td>No hidden control flow</td></tr>
+<tr><td>NULL safety</td><td><code>ptr == NULL</code></td><td><code>nullptr</code>, <code>std::optional&lt;T&gt;</code></td><td><code>Option&lt;T&gt;</code></td><td>Forced null checking</td></tr>
+<tr><td>Thread safety</td><td>Manual (pthreads)</td><td>Manual (<code>std::mutex</code>, etc.)</td><td>Compile-time <code>Send</code>/<code>Sync</code></td><td>Data races impossible</td></tr>
+<tr><td>Build system</td><td>Make, CMake</td><td>CMake, Make, etc.</td><td>Cargo</td><td>Integrated toolchain</td></tr>
+<tr><td>Undefined behavior</td><td>Rampant</td><td>Subtle (signed overflow, aliasing)</td><td>Zero in safe code</td><td>Safety guaranteed</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch01-introduction-and-motivation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="ch02-getting-started.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch01-introduction-and-motivation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="ch02-getting-started.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+        <script>
+            window.playground_line_numbers = true;
+        </script>
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="ace-2a3cd908.js"></script>
+        <script src="mode-rust-2c9d5c9a.js"></script>
+        <script src="editor-16ca416c.js"></script>
+        <script src="theme-dawn-4493f9c8.js"></script>
+        <script src="theme-tomorrow_night-9dbe62a9.js"></script>
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="mermaid-35374ef1.min.js"></script>
+        <script src="mermaid-init-12acb6c2.js"></script>
+
+
+
+    </div>
+    </body>
+</html>

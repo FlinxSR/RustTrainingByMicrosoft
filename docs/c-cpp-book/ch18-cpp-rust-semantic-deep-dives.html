@@ -1,0 +1,1013 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>18. C++ → Rust Semantic Deep Dives - Rust for C/C++ Programmers</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "ayu";
+            window.path_to_searchindex_js = "searchindex-a7170a72.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-a041bca1.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Rust for C/C++ Programmers</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/microsoft/RustTraining" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h2 id="c--rust-semantic-deep-dives"><a class="header" href="#c--rust-semantic-deep-dives">C++ → Rust Semantic Deep Dives</a></h2>
+<blockquote>
+<p><strong>What you’ll learn:</strong> Detailed mappings for C++ concepts that don’t have obvious Rust equivalents — the four named casts, SFINAE vs trait bounds, CRTP vs associated types, and other common friction points during translation.</p>
+</blockquote>
+<p>The sections below map C++ concepts that don’t have an obvious 1:1 Rust
+equivalent. These differences frequently trip up C++ programmers during
+translation work.</p>
+<h3 id="casting-hierarchy-four-c-casts--rust-equivalents"><a class="header" href="#casting-hierarchy-four-c-casts--rust-equivalents">Casting Hierarchy: Four C++ Casts → Rust Equivalents</a></h3>
+<p>C++ has four named casts. Rust replaces them with different, more explicit mechanisms:</p>
+<pre><code class="language-cpp">// C++ casting hierarchy
+int i = static_cast&lt;int&gt;(3.14);            // 1. Numeric / up-cast
+Derived* d = dynamic_cast&lt;Derived*&gt;(base); // 2. Runtime downcasting
+int* p = const_cast&lt;int*&gt;(cp);              // 3. Cast away const
+auto* raw = reinterpret_cast&lt;char*&gt;(&amp;obj); // 4. Bit-level reinterpretation
+</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>C++ Cast</th><th>Rust Equivalent</th><th>Safety</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td><code>static_cast</code> (numeric)</td><td><code>as</code> keyword</td><td>Safe but can truncate/wrap</td><td><code>let i = 3.14_f64 as i32;</code> — truncates to 3</td></tr>
+<tr><td><code>static_cast</code> (numeric, checked)</td><td><code>From</code>/<code>Into</code></td><td>Safe, compile-time verified</td><td><code>let i: i32 = 42_u8.into();</code> — only widens</td></tr>
+<tr><td><code>static_cast</code> (numeric, fallible)</td><td><code>TryFrom</code>/<code>TryInto</code></td><td>Safe, returns <code>Result</code></td><td><code>let i: u8 = 300_u16.try_into()?;</code> — returns Err</td></tr>
+<tr><td><code>dynamic_cast</code> (downcast)</td><td><code>match</code> on enum / <code>Any::downcast_ref</code></td><td>Safe</td><td>Pattern matching for enums; <code>Any</code> for trait objects</td></tr>
+<tr><td><code>const_cast</code></td><td>No equivalent</td><td></td><td>Rust has no way to cast away <code>&amp;</code> → <code>&amp;mut</code> in safe code. Use <code>Cell</code>/<code>RefCell</code> for interior mutability</td></tr>
+<tr><td><code>reinterpret_cast</code></td><td><code>std::mem::transmute</code></td><td><strong><code>unsafe</code></strong></td><td>Reinterprets bit pattern. Almost always wrong — prefer <code>from_le_bytes()</code> etc.</td></tr>
+</tbody>
+</table>
+</div>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Rust equivalents:
+
+// 1. Numeric casts — prefer From/Into over `as`
+let widened: u32 = 42_u8.into();             // Infallible widening — always prefer
+let truncated = 300_u16 as u8;                // ⚠ Wraps to 44! Silent data loss
+let checked: Result&lt;u8, _&gt; = 300_u16.try_into(); // Err — safe fallible conversion
+
+// 2. Downcast: enum (preferred) or Any (when needed for type erasure)
+use std::any::Any;
+
+fn handle_any(val: &amp;dyn Any) {
+    if let Some(s) = val.downcast_ref::&lt;String&gt;() {
+        println!("Got string: {s}");
+    } else if let Some(n) = val.downcast_ref::&lt;i32&gt;() {
+        println!("Got int: {n}");
+    }
+}
+
+// 3. "const_cast" → interior mutability (no unsafe needed)
+use std::cell::Cell;
+struct Sensor {
+    read_count: Cell&lt;u32&gt;,  // Mutate through &amp;self
+}
+impl Sensor {
+    fn read(&amp;self) -&gt; f64 {
+        self.read_count.set(self.read_count.get() + 1); // &amp;self, not &amp;mut self
+        42.0
+    }
+}
+
+// 4. reinterpret_cast → transmute (almost never needed)
+// Prefer safe alternatives:
+let bytes: [u8; 4] = 0x12345678_u32.to_ne_bytes();  // ✅ Safe
+let val = u32::from_ne_bytes(bytes);                   // ✅ Safe
+// unsafe { std::mem::transmute::&lt;u32, [u8; 4]&gt;(val) } // ❌ Avoid
+<span class="boring">}</span></code></pre>
+<blockquote>
+<p><strong>Guideline</strong>: In idiomatic Rust, <code>as</code> should be rare (use <code>From</code>/<code>Into</code>
+for widening, <code>TryFrom</code>/<code>TryInto</code> for narrowing), <code>transmute</code> should be
+exceptional, and <code>const_cast</code> has no equivalent because interior mutability
+types make it unnecessary.</p>
+</blockquote>
+<hr>
+<h3 id="preprocessor--cfg-feature-flags-and-macro_rules"><a class="header" href="#preprocessor--cfg-feature-flags-and-macro_rules">Preprocessor → <code>cfg</code>, Feature Flags, and <code>macro_rules!</code></a></h3>
+<p>C++ relies heavily on the preprocessor for conditional compilation, constants, and
+code generation. Rust replaces all of these with first-class language features.</p>
+<h4 id="define-constants--const-or-const-fn"><a class="header" href="#define-constants--const-or-const-fn"><code>#define</code> constants → <code>const</code> or <code>const fn</code></a></h4>
+<pre><code class="language-cpp">// C++
+#define MAX_RETRIES 5
+#define BUFFER_SIZE (1024 * 64)
+#define SQUARE(x) ((x) * (x))  // Macro — textual substitution, no type safety
+</code></pre>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Rust — type-safe, scoped, no textual substitution
+const MAX_RETRIES: u32 = 5;
+const BUFFER_SIZE: usize = 1024 * 64;
+const fn square(x: u32) -&gt; u32 { x * x }  // Evaluated at compile time
+
+// Can be used in const contexts:
+const AREA: u32 = square(12);  // Computed at compile time
+static BUFFER: [u8; BUFFER_SIZE] = [0; BUFFER_SIZE];
+<span class="boring">}</span></code></pre>
+<h4 id="ifdef--if--cfg-and-cfg"><a class="header" href="#ifdef--if--cfg-and-cfg"><code>#ifdef</code> / <code>#if</code> → <code>#[cfg()]</code> and <code>cfg!()</code></a></h4>
+<pre><code class="language-cpp">// C++
+#ifdef DEBUG
+    log_verbose("Step 1 complete");
+#endif
+
+#if defined(LINUX) &amp;&amp; !defined(ARM)
+    use_x86_path();
+#else
+    use_generic_path();
+#endif
+</code></pre>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Rust — attribute-based conditional compilation
+#[cfg(debug_assertions)]
+fn log_verbose(msg: &amp;str) { eprintln!("[VERBOSE] {msg}"); }
+
+#[cfg(not(debug_assertions))]
+fn log_verbose(_msg: &amp;str) { /* compiled away in release */ }
+
+// Combine conditions:
+#[cfg(all(target_os = "linux", target_arch = "x86_64"))]
+fn use_x86_path() { /* ... */ }
+
+#[cfg(not(all(target_os = "linux", target_arch = "x86_64")))]
+fn use_generic_path() { /* ... */ }
+
+// Runtime check (condition is still compile-time, but usable in expressions):
+if cfg!(target_os = "windows") {
+    println!("Running on Windows");
+}
+<span class="boring">}</span></code></pre>
+<h4 id="feature-flags-in-cargotoml"><a class="header" href="#feature-flags-in-cargotoml">Feature flags in <code>Cargo.toml</code></a></h4>
+<pre><code class="language-toml"># Cargo.toml — replace #ifdef FEATURE_FOO
+[features]
+default = ["json"]
+json = ["dep:serde_json"]       # Optional dependency
+verbose-logging = []            # Flag with no extra dependency
+gpu-support = ["dep:cuda-sys"]  # Optional GPU support
+</code></pre>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Conditional code based on feature flags:
+#[cfg(feature = "json")]
+pub fn parse_config(data: &amp;str) -&gt; Result&lt;Config, Error&gt; {
+    serde_json::from_str(data).map_err(Error::from)
+}
+
+#[cfg(feature = "verbose-logging")]
+macro_rules! verbose {
+    ($($arg:tt)*) =&gt; { eprintln!("[VERBOSE] {}", format!($($arg)*)); }
+}
+#[cfg(not(feature = "verbose-logging"))]
+macro_rules! verbose {
+    ($($arg:tt)*) =&gt; { }; // Compiles to nothing
+}
+<span class="boring">}</span></code></pre>
+<h4 id="define-macrox--macro_rules"><a class="header" href="#define-macrox--macro_rules"><code>#define MACRO(x)</code> → <code>macro_rules!</code></a></h4>
+<pre><code class="language-cpp">// C++ — textual substitution, notoriously error-prone
+#define DIAG_CHECK(cond, msg) \
+    do { if (!(cond)) { log_error(msg); return false; } } while(0)
+</code></pre>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Rust — hygienic, type-checked, operates on syntax tree
+macro_rules! diag_check {
+    ($cond:expr, $msg:expr) =&gt; {
+        if !($cond) {
+            log_error($msg);
+            return Err(DiagError::CheckFailed($msg.to_string()));
+        }
+    };
+}
+
+fn run_test() -&gt; Result&lt;(), DiagError&gt; {
+    diag_check!(temperature &lt; 85.0, "GPU too hot");
+    diag_check!(voltage &gt; 0.8, "Rail voltage too low");
+    Ok(())
+}
+<span class="boring">}</span></code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>C++ Preprocessor</th><th>Rust Equivalent</th><th>Advantage</th></tr>
+</thead>
+<tbody>
+<tr><td><code>#define PI 3.14</code></td><td><code>const PI: f64 = 3.14;</code></td><td>Typed, scoped, visible to debugger</td></tr>
+<tr><td><code>#define MAX(a,b) ((a)&gt;(b)?(a):(b))</code></td><td><code>macro_rules!</code> or generic <code>fn max&lt;T: Ord&gt;</code></td><td>No double-evaluation bugs</td></tr>
+<tr><td><code>#ifdef DEBUG</code></td><td><code>#[cfg(debug_assertions)]</code></td><td>Checked by compiler, no typo risk</td></tr>
+<tr><td><code>#ifdef FEATURE_X</code></td><td><code>#[cfg(feature = "x")]</code></td><td>Cargo manages features; dependency-aware</td></tr>
+<tr><td><code>#include "header.h"</code></td><td><code>mod module;</code> + <code>use module::Item;</code></td><td>No include guards, no circular includes</td></tr>
+<tr><td><code>#pragma once</code></td><td>Not needed</td><td>Each <code>.rs</code> file is a module — included exactly once</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="header-files-and-include--modules-and-use"><a class="header" href="#header-files-and-include--modules-and-use">Header Files and <code>#include</code> → Modules and <code>use</code></a></h3>
+<p>In C++, the compilation model revolves around textual inclusion:</p>
+<pre><code class="language-cpp">// widget.h — every translation unit that uses Widget includes this
+#pragma once
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+class Widget {
+public:
+    Widget(std::string name);
+    void activate();
+private:
+    std::string name_;
+    std::vector&lt;int&gt; data_;
+};
+</code></pre>
+<pre><code class="language-cpp">// widget.cpp — separate definition
+#include "widget.h"
+Widget::Widget(std::string name) : name_(std::move(name)) {}
+void Widget::activate() { /* ... */ }
+</code></pre>
+<p>In Rust, there are <strong>no header files, no forward declarations, no include guards</strong>:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// src/widget.rs — declaration AND definition in one file
+pub struct Widget {
+    name: String,         // Private by default
+    data: Vec&lt;i32&gt;,
+}
+
+impl Widget {
+    pub fn new(name: String) -&gt; Self {
+        Widget { name, data: Vec::new() }
+    }
+    pub fn activate(&amp;self) { /* ... */ }
+}
+<span class="boring">}</span></code></pre>
+<pre class="playground"><code class="language-rust">// src/main.rs — import by module path
+mod widget;  // Tells compiler to include src/widget.rs
+use widget::Widget;
+
+fn main() {
+    let w = Widget::new("sensor".to_string());
+    w.activate();
+}</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>C++</th><th>Rust</th><th>Why it’s better</th></tr>
+</thead>
+<tbody>
+<tr><td><code>#include "foo.h"</code></td><td><code>mod foo;</code> in parent + <code>use foo::Item;</code></td><td>No textual inclusion, no ODR violations</td></tr>
+<tr><td><code>#pragma once</code> / include guards</td><td>Not needed</td><td>Each <code>.rs</code> file is a module — compiled once</td></tr>
+<tr><td>Forward declarations</td><td>Not needed</td><td>Compiler sees entire crate; order doesn’t matter</td></tr>
+<tr><td><code>class Foo;</code> (incomplete type)</td><td>Not needed</td><td>No separate declaration/definition split</td></tr>
+<tr><td><code>.h</code> + <code>.cpp</code> for each class</td><td>Single <code>.rs</code> file</td><td>No declaration/definition mismatch bugs</td></tr>
+<tr><td><code>using namespace std;</code></td><td><code>use std::collections::HashMap;</code></td><td>Always explicit — no global namespace pollution</td></tr>
+<tr><td>Nested <code>namespace a::b</code></td><td>Nested <code>mod a { mod b { } }</code> or <code>a/b.rs</code></td><td>File system mirrors module tree</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="friend-and-access-control--module-visibility"><a class="header" href="#friend-and-access-control--module-visibility"><code>friend</code> and Access Control → Module Visibility</a></h3>
+<p>C++ uses <code>friend</code> to grant specific classes or functions access to private members.
+Rust has no <code>friend</code> keyword — instead, <strong>privacy is module-scoped</strong>:</p>
+<pre><code class="language-cpp">// C++
+class Engine {
+    friend class Car;   // Car can access private members
+    int rpm_;
+    void set_rpm(int r) { rpm_ = r; }
+public:
+    int rpm() const { return rpm_; }
+};
+</code></pre>
+<pre class="playground"><code class="language-rust">// Rust — items in the same module can access all fields, no `friend` needed
+mod vehicle {
+    pub struct Engine {
+        rpm: u32,  // Private to the module (not to the struct!)
+    }
+
+    impl Engine {
+        pub fn new() -&gt; Self { Engine { rpm: 0 } }
+        pub fn rpm(&amp;self) -&gt; u32 { self.rpm }
+    }
+
+    pub struct Car {
+        engine: Engine,
+    }
+
+    impl Car {
+        pub fn new() -&gt; Self { Car { engine: Engine::new() } }
+        pub fn accelerate(&amp;mut self) {
+            self.engine.rpm = 3000; // ✅ Same module — direct field access
+        }
+        pub fn rpm(&amp;self) -&gt; u32 {
+            self.engine.rpm  // ✅ Same module — can read private field
+        }
+    }
+}
+
+fn main() {
+    let mut car = vehicle::Car::new();
+    car.accelerate();
+    // car.engine.rpm = 9000;  // ❌ Compile error: `engine` is private
+    println!("RPM: {}", car.rpm()); // ✅ Public method on Car
+}</code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>C++ Access</th><th>Rust Equivalent</th><th>Scope</th></tr>
+</thead>
+<tbody>
+<tr><td><code>private</code></td><td>(default, no keyword)</td><td>Accessible within the same module only</td></tr>
+<tr><td><code>protected</code></td><td>No direct equivalent</td><td>Use <code>pub(super)</code> for parent module access</td></tr>
+<tr><td><code>public</code></td><td><code>pub</code></td><td>Accessible everywhere</td></tr>
+<tr><td><code>friend class Foo</code></td><td>Put <code>Foo</code> in the same module</td><td>Module-level privacy replaces friend</td></tr>
+<tr><td>—</td><td><code>pub(crate)</code></td><td>Visible within the crate but not to external dependents</td></tr>
+<tr><td>—</td><td><code>pub(super)</code></td><td>Visible to the parent module only</td></tr>
+<tr><td>—</td><td><code>pub(in crate::path)</code></td><td>Visible within a specific module subtree</td></tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>Key insight</strong>: C++ privacy is per-class. Rust privacy is per-module.
+This means you control access by choosing which types live in the same module —
+colocated types have full access to each other’s private fields.</p>
+</blockquote>
+<hr>
+<h3 id="volatile--atomics-and-read_volatilewrite_volatile"><a class="header" href="#volatile--atomics-and-read_volatilewrite_volatile"><code>volatile</code> → Atomics and <code>read_volatile</code>/<code>write_volatile</code></a></h3>
+<p>In C++, <code>volatile</code> tells the compiler not to optimize away reads/writes — typically
+used for memory-mapped hardware registers. <strong>Rust has no <code>volatile</code> keyword.</strong></p>
+<pre><code class="language-cpp">// C++: volatile for hardware registers
+volatile uint32_t* const GPIO_REG = reinterpret_cast&lt;volatile uint32_t*&gt;(0x4002'0000);
+*GPIO_REG = 0x01;              // Write not optimized away
+uint32_t val = *GPIO_REG;     // Read not optimized away
+</code></pre>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Rust: explicit volatile operations — only in unsafe code
+use std::ptr;
+
+const GPIO_REG: *mut u32 = 0x4002_0000 as *mut u32;
+
+// SAFETY: GPIO_REG is a valid memory-mapped I/O address.
+unsafe {
+    ptr::write_volatile(GPIO_REG, 0x01);   // Write not optimized away
+    let val = ptr::read_volatile(GPIO_REG); // Read not optimized away
+}
+<span class="boring">}</span></code></pre>
+<p>For <strong>concurrent shared state</strong> (the other common C++ <code>volatile</code> use), Rust uses atomics:</p>
+<pre><code class="language-cpp">// C++: volatile is NOT sufficient for thread safety (common mistake!)
+volatile bool stop_flag = false;  // ❌ Data race — UB in C++11+
+
+// Correct C++:
+std::atomic&lt;bool&gt; stop_flag{false};
+</code></pre>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Rust: atomics are the only way to share mutable state across threads
+use std::sync::atomic::{AtomicBool, Ordering};
+
+static STOP_FLAG: AtomicBool = AtomicBool::new(false);
+
+// From another thread:
+STOP_FLAG.store(true, Ordering::Release);
+
+// Check:
+if STOP_FLAG.load(Ordering::Acquire) {
+    println!("Stopping");
+}
+<span class="boring">}</span></code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>C++ Usage</th><th>Rust Equivalent</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td><code>volatile</code> for hardware registers</td><td><code>ptr::read_volatile</code> / <code>ptr::write_volatile</code></td><td>Requires <code>unsafe</code> — correct for MMIO</td></tr>
+<tr><td><code>volatile</code> for thread signaling</td><td><code>AtomicBool</code> / <code>AtomicU32</code> etc.</td><td>C++ <code>volatile</code> is wrong for this too!</td></tr>
+<tr><td><code>std::atomic&lt;T&gt;</code></td><td><code>std::sync::atomic::AtomicT</code></td><td>Same semantics, same orderings</td></tr>
+<tr><td><code>std::atomic&lt;T&gt;::load(memory_order_acquire)</code></td><td><code>AtomicT::load(Ordering::Acquire)</code></td><td>1:1 mapping</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="static-variables--static-const-lazylock-oncelock"><a class="header" href="#static-variables--static-const-lazylock-oncelock"><code>static</code> Variables → <code>static</code>, <code>const</code>, <code>LazyLock</code>, <code>OnceLock</code></a></h3>
+<h4 id="basic-static-and-const"><a class="header" href="#basic-static-and-const">Basic <code>static</code> and <code>const</code></a></h4>
+<pre><code class="language-cpp">// C++
+const int MAX_RETRIES = 5;                    // Compile-time constant
+static std::string CONFIG_PATH = "/etc/app";  // Static init — order undefined!
+</code></pre>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Rust
+const MAX_RETRIES: u32 = 5;                   // Compile-time constant, inlined
+static CONFIG_PATH: &amp;str = "/etc/app";         // 'static lifetime, fixed address
+<span class="boring">}</span></code></pre>
+<h4 id="the-static-initialization-order-fiasco"><a class="header" href="#the-static-initialization-order-fiasco">The static initialization order fiasco</a></h4>
+<p>C++ has a well-known problem: global constructors in different translation units
+execute in <strong>unspecified order</strong>. Rust avoids this entirely — <code>static</code> values must
+be compile-time constants (no constructors).</p>
+<p>For runtime-initialized globals, use <code>LazyLock</code> (Rust 1.80+) or <code>OnceLock</code>:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::sync::LazyLock;
+
+// Equivalent to C++ `static std::regex` — initialized on first access, thread-safe
+static CONFIG_REGEX: LazyLock&lt;regex::Regex&gt; = LazyLock::new(|| {
+    regex::Regex::new(r"^[a-z]+_diag$").expect("invalid regex")
+});
+
+fn is_valid_diag(name: &amp;str) -&gt; bool {
+    CONFIG_REGEX.is_match(name)  // First call initializes; subsequent calls are fast
+}
+<span class="boring">}</span></code></pre>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::sync::OnceLock;
+
+// OnceLock: initialized once, can be set from runtime data
+static DB_CONN: OnceLock&lt;String&gt; = OnceLock::new();
+
+fn init_db(connection_string: &amp;str) {
+    DB_CONN.set(connection_string.to_string())
+        .expect("DB_CONN already initialized");
+}
+
+fn get_db() -&gt; &amp;'static str {
+    DB_CONN.get().expect("DB not initialized")
+}
+<span class="boring">}</span></code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>C++</th><th>Rust</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td><code>const int X = 5;</code></td><td><code>const X: i32 = 5;</code></td><td>Both compile-time. Rust requires type annotation</td></tr>
+<tr><td><code>constexpr int X = 5;</code></td><td><code>const X: i32 = 5;</code></td><td>Rust <code>const</code> is always constexpr</td></tr>
+<tr><td><code>static int count = 0;</code> (file scope)</td><td><code>static COUNT: AtomicI32 = AtomicI32::new(0);</code></td><td>Mutable statics require <code>unsafe</code> or atomics</td></tr>
+<tr><td><code>static std::string s = "hi";</code></td><td><code>static S: &amp;str = "hi";</code> or <code>LazyLock&lt;String&gt;</code></td><td>No runtime constructor for simple cases</td></tr>
+<tr><td><code>static MyObj obj;</code> (complex init)</td><td><code>static OBJ: LazyLock&lt;MyObj&gt; = LazyLock::new(|| { ... });</code></td><td>Thread-safe, lazy, no init order issues</td></tr>
+<tr><td><code>thread_local</code></td><td><code>thread_local! { static X: Cell&lt;u32&gt; = Cell::new(0); }</code></td><td>Same semantics</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="constexpr--const-fn"><a class="header" href="#constexpr--const-fn"><code>constexpr</code> → <code>const fn</code></a></h3>
+<p>C++ <code>constexpr</code> marks functions and variables for compile-time evaluation. Rust
+uses <code>const fn</code> and <code>const</code> for the same purpose:</p>
+<pre><code class="language-cpp">// C++
+constexpr int factorial(int n) {
+    return n &lt;= 1 ? 1 : n * factorial(n - 1);
+}
+constexpr int val = factorial(5);  // Computed at compile time → 120
+</code></pre>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Rust
+const fn factorial(n: u32) -&gt; u32 {
+    if n &lt;= 1 { 1 } else { n * factorial(n - 1) }
+}
+const VAL: u32 = factorial(5);  // Computed at compile time → 120
+
+// Also works in array sizes and match patterns:
+const LOOKUP: [u32; 5] = [factorial(1), factorial(2), factorial(3),
+                           factorial(4), factorial(5)];
+<span class="boring">}</span></code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>C++</th><th>Rust</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td><code>constexpr int f()</code></td><td><code>const fn f() -&gt; i32</code></td><td>Same intent — compile-time evaluable</td></tr>
+<tr><td><code>constexpr</code> variable</td><td><code>const</code> variable</td><td>Rust <code>const</code> is always compile-time</td></tr>
+<tr><td><code>consteval</code> (C++20)</td><td>No equivalent</td><td><code>const fn</code> can also run at runtime</td></tr>
+<tr><td><code>if constexpr</code> (C++17)</td><td>No equivalent (use <code>cfg!</code> or generics)</td><td>Trait specialization fills some use cases</td></tr>
+<tr><td><code>constinit</code> (C++20)</td><td><code>static</code> with const initializer</td><td>Rust <code>static</code> must be const-initialized by default</td></tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>Current limitations of <code>const fn</code></strong> (stabilized as of Rust 1.82):</p>
+<ul>
+<li>No trait methods (can’t call <code>.len()</code> on a <code>Vec</code> in const context)</li>
+<li>No heap allocation (<code>Box::new</code>, <code>Vec::new</code> not const)</li>
+<li><del>No floating-point arithmetic</del> — <strong>stabilized in Rust 1.82</strong></li>
+<li>Can’t use <code>for</code> loops (use recursion or <code>while</code> with manual index)</li>
+</ul>
+</blockquote>
+<hr>
+<h3 id="sfinae-and-enable_if--trait-bounds-and-where-clauses"><a class="header" href="#sfinae-and-enable_if--trait-bounds-and-where-clauses">SFINAE and <code>enable_if</code> → Trait Bounds and <code>where</code> Clauses</a></h3>
+<p>In C++, SFINAE (Substitution Failure Is Not An Error) is the mechanism behind
+conditional generic programming. It is powerful but notoriously unreadable. Rust
+replaces it entirely with <strong>trait bounds</strong>:</p>
+<pre><code class="language-cpp">// C++: SFINAE-based conditional function (pre-C++20)
+template&lt;typename T,
+         std::enable_if_t&lt;std::is_integral_v&lt;T&gt;, int&gt; = 0&gt;
+T double_it(T val) { return val * 2; }
+
+template&lt;typename T,
+         std::enable_if_t&lt;std::is_floating_point_v&lt;T&gt;, int&gt; = 0&gt;
+T double_it(T val) { return val * 2.0; }
+
+// C++20 concepts — cleaner but still verbose:
+template&lt;std::integral T&gt;
+T double_it(T val) { return val * 2; }
+</code></pre>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Rust: trait bounds — readable, composable, excellent error messages
+use std::ops::Mul;
+
+fn double_it&lt;T: Mul&lt;Output = T&gt; + From&lt;u8&gt;&gt;(val: T) -&gt; T {
+    val * T::from(2)
+}
+
+// Or with where clause for complex bounds:
+fn process&lt;T&gt;(val: T) -&gt; String
+where
+    T: std::fmt::Display + Clone + Send,
+{
+    format!("Processing: {}", val)
+}
+
+// Conditional behavior via separate impls (replaces SFINAE overloads):
+trait Describable {
+    fn describe(&amp;self) -&gt; String;
+}
+
+impl Describable for u32 {
+    fn describe(&amp;self) -&gt; String { format!("integer: {self}") }
+}
+
+impl Describable for f64 {
+    fn describe(&amp;self) -&gt; String { format!("float: {self:.2}") }
+}
+<span class="boring">}</span></code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>C++ Template Metaprogramming</th><th>Rust Equivalent</th><th>Readability</th></tr>
+</thead>
+<tbody>
+<tr><td><code>std::enable_if_t&lt;cond&gt;</code></td><td><code>where T: Trait</code></td><td>🟢 Clear English</td></tr>
+<tr><td><code>std::is_integral_v&lt;T&gt;</code></td><td>Bound on a numeric trait or specific types</td><td>🟢 No <code>_v</code> / <code>_t</code> suffixes</td></tr>
+<tr><td>SFINAE overload sets</td><td>Separate <code>impl Trait for ConcreteType</code> blocks</td><td>🟢 Each impl stands alone</td></tr>
+<tr><td><code>if constexpr (std::is_same_v&lt;T, int&gt;)</code></td><td>Specialization via trait impls</td><td>🟢 Compile-time dispatched</td></tr>
+<tr><td>C++20 <code>concept</code></td><td><code>trait</code></td><td>🟢 Nearly identical intent</td></tr>
+<tr><td><code>requires</code> clause</td><td><code>where</code> clause</td><td>🟢 Same position, similar syntax</td></tr>
+<tr><td>Compilation fails deep inside template</td><td>Compilation fails at the call site with trait mismatch</td><td>🟢 No 200-line error cascades</td></tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>Key insight</strong>: C++ concepts (C++20) are the closest thing to Rust traits.
+If you’re familiar with C++20 concepts, think of Rust traits as concepts
+that have been a first-class language feature since 1.0, with a coherent
+implementation model (trait impls) instead of duck typing.</p>
+</blockquote>
+<hr>
+<h3 id="stdfunction--function-pointers-impl-fn-and-boxdyn-fn"><a class="header" href="#stdfunction--function-pointers-impl-fn-and-boxdyn-fn"><code>std::function</code> → Function Pointers, <code>impl Fn</code>, and <code>Box&lt;dyn Fn&gt;</code></a></h3>
+<p>C++ <code>std::function&lt;R(Args...)&gt;</code> is a type-erased callable. Rust has three options,
+each with different trade-offs:</p>
+<pre><code class="language-cpp">// C++: one-size-fits-all (heap-allocated, type-erased)
+#include &lt;functional&gt;
+std::function&lt;int(int)&gt; make_adder(int n) {
+    return [n](int x) { return x + n; };
+}
+</code></pre>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Rust Option 1: fn pointer — simple, no captures, no allocation
+fn add_one(x: i32) -&gt; i32 { x + 1 }
+let f: fn(i32) -&gt; i32 = add_one;
+println!("{}", f(5)); // 6
+
+// Rust Option 2: impl Fn — monomorphized, zero overhead, can capture
+fn apply(val: i32, f: impl Fn(i32) -&gt; i32) -&gt; i32 { f(val) }
+let n = 10;
+let result = apply(5, |x| x + n);  // Closure captures `n`
+
+// Rust Option 3: Box&lt;dyn Fn&gt; — type-erased, heap-allocated (like std::function)
+fn make_adder(n: i32) -&gt; Box&lt;dyn Fn(i32) -&gt; i32&gt; {
+    Box::new(move |x| x + n)
+}
+let adder = make_adder(10);
+println!("{}", adder(5));  // 15
+
+// Storing heterogeneous callables (like vector&lt;function&lt;int(int)&gt;&gt;):
+let callbacks: Vec&lt;Box&lt;dyn Fn(i32) -&gt; i32&gt;&gt; = vec![
+    Box::new(|x| x + 1),
+    Box::new(|x| x * 2),
+    Box::new(make_adder(100)),
+];
+for cb in &amp;callbacks {
+    println!("{}", cb(5));  // 6, 10, 105
+}
+<span class="boring">}</span></code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>When to use</th><th>C++ Equivalent</th><th>Rust Choice</th></tr>
+</thead>
+<tbody>
+<tr><td>Top-level function, no captures</td><td>Function pointer</td><td><code>fn(Args) -&gt; Ret</code></td></tr>
+<tr><td>Generic function accepting callables</td><td>Template parameter</td><td><code>impl Fn(Args) -&gt; Ret</code> (static dispatch)</td></tr>
+<tr><td>Trait bound in generics</td><td><code>template&lt;typename F&gt;</code></td><td><code>F: Fn(Args) -&gt; Ret</code></td></tr>
+<tr><td>Stored callable, type-erased</td><td><code>std::function&lt;R(Args)&gt;</code></td><td><code>Box&lt;dyn Fn(Args) -&gt; Ret&gt;</code></td></tr>
+<tr><td>Callback that mutates state</td><td><code>std::function</code> with mutable lambda</td><td><code>Box&lt;dyn FnMut(Args) -&gt; Ret&gt;</code></td></tr>
+<tr><td>One-shot callback (consumed)</td><td><code>std::function</code> (moved)</td><td><code>Box&lt;dyn FnOnce(Args) -&gt; Ret&gt;</code></td></tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>Performance note</strong>: <code>impl Fn</code> has zero overhead (monomorphized, like a C++ template).
+<code>Box&lt;dyn Fn&gt;</code> has the same overhead as <code>std::function</code> (vtable + heap allocation).
+Prefer <code>impl Fn</code> unless you need to store heterogeneous callables.</p>
+</blockquote>
+<hr>
+<h3 id="container-mapping-c-stl--rust-stdcollections"><a class="header" href="#container-mapping-c-stl--rust-stdcollections">Container Mapping: C++ STL → Rust <code>std::collections</code></a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>C++ STL Container</th><th>Rust Equivalent</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td><code>std::vector&lt;T&gt;</code></td><td><code>Vec&lt;T&gt;</code></td><td>Nearly identical API. Rust checks bounds by default</td></tr>
+<tr><td><code>std::array&lt;T, N&gt;</code></td><td><code>[T; N]</code></td><td>Stack-allocated fixed-size array</td></tr>
+<tr><td><code>std::deque&lt;T&gt;</code></td><td><code>std::collections::VecDeque&lt;T&gt;</code></td><td>Ring buffer. Efficient push/pop at both ends</td></tr>
+<tr><td><code>std::list&lt;T&gt;</code></td><td><code>std::collections::LinkedList&lt;T&gt;</code></td><td>Rarely used in Rust — <code>Vec</code> is almost always faster</td></tr>
+<tr><td><code>std::forward_list&lt;T&gt;</code></td><td>No equivalent</td><td>Use <code>Vec</code> or <code>VecDeque</code></td></tr>
+<tr><td><code>std::unordered_map&lt;K, V&gt;</code></td><td><code>std::collections::HashMap&lt;K, V&gt;</code></td><td>Uses <code>SipHash</code> by default (DoS-resistant)</td></tr>
+<tr><td><code>std::map&lt;K, V&gt;</code></td><td><code>std::collections::BTreeMap&lt;K, V&gt;</code></td><td>B-tree; keys sorted; <code>K: Ord</code> required</td></tr>
+<tr><td><code>std::unordered_set&lt;T&gt;</code></td><td><code>std::collections::HashSet&lt;T&gt;</code></td><td><code>T: Hash + Eq</code> required</td></tr>
+<tr><td><code>std::set&lt;T&gt;</code></td><td><code>std::collections::BTreeSet&lt;T&gt;</code></td><td>Sorted set; <code>T: Ord</code> required</td></tr>
+<tr><td><code>std::priority_queue&lt;T&gt;</code></td><td><code>std::collections::BinaryHeap&lt;T&gt;</code></td><td>Max-heap by default (same as C++)</td></tr>
+<tr><td><code>std::stack&lt;T&gt;</code></td><td><code>Vec&lt;T&gt;</code> with <code>.push()</code> / <code>.pop()</code></td><td>No separate stack type needed</td></tr>
+<tr><td><code>std::queue&lt;T&gt;</code></td><td><code>VecDeque&lt;T&gt;</code> with <code>.push_back()</code> / <code>.pop_front()</code></td><td>No separate queue type needed</td></tr>
+<tr><td><code>std::string</code></td><td><code>String</code></td><td>UTF-8 guaranteed, not null-terminated</td></tr>
+<tr><td><code>std::string_view</code></td><td><code>&amp;str</code></td><td>Borrowed UTF-8 slice</td></tr>
+<tr><td><code>std::span&lt;T&gt;</code> (C++20)</td><td><code>&amp;[T]</code> / <code>&amp;mut [T]</code></td><td>Rust slices have been a first-class type since 1.0</td></tr>
+<tr><td><code>std::tuple&lt;A, B, C&gt;</code></td><td><code>(A, B, C)</code></td><td>First-class syntax, destructurable</td></tr>
+<tr><td><code>std::pair&lt;A, B&gt;</code></td><td><code>(A, B)</code></td><td>Just a 2-element tuple</td></tr>
+<tr><td><code>std::bitset&lt;N&gt;</code></td><td>No std equivalent</td><td>Use the <code>bitvec</code> crate or <code>[u8; N/8]</code></td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Key differences</strong>:</p>
+<ul>
+<li>Rust’s <code>HashMap</code>/<code>HashSet</code> require <code>K: Hash + Eq</code> — the compiler enforces this at the type level, unlike C++ where using an unhashable key gives a template error deep in the STL</li>
+<li><code>Vec</code> indexing (<code>v[i]</code>) panics on out-of-bounds by default. Use <code>.get(i)</code> for <code>Option&lt;&amp;T&gt;</code> or iterators to avoid bounds checks entirely</li>
+<li>No <code>std::multimap</code> or <code>std::multiset</code> — use <code>HashMap&lt;K, Vec&lt;V&gt;&gt;</code> or <code>BTreeMap&lt;K, Vec&lt;V&gt;&gt;</code></li>
+</ul>
+<hr>
+<h3 id="exception-safety--panic-safety"><a class="header" href="#exception-safety--panic-safety">Exception Safety → Panic Safety</a></h3>
+<p>C++ defines three levels of exception safety (Abrahams guarantees):</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>C++ Level</th><th>Meaning</th><th>Rust Equivalent</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>No-throw</strong></td><td>Function never throws</td><td>Function never panics (returns <code>Result</code>)</td></tr>
+<tr><td><strong>Strong</strong> (commit-or-rollback)</td><td>If it throws, state is unchanged</td><td>Ownership model makes this natural — if <code>?</code> returns early, partially built values are dropped</td></tr>
+<tr><td><strong>Basic</strong></td><td>If it throws, invariants are preserved</td><td>Rust’s default — <code>Drop</code> runs, no leaks</td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="how-rusts-ownership-model-helps"><a class="header" href="#how-rusts-ownership-model-helps">How Rust’s ownership model helps</a></h4>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Strong guarantee for free — if file.write() fails, config is unchanged
+fn update_config(config: &amp;mut Config, path: &amp;str) -&gt; Result&lt;(), Error&gt; {
+    let new_data = fetch_from_network()?; // Err → early return, config untouched
+    let validated = validate(new_data)?;   // Err → early return, config untouched
+    *config = validated;                   // Only reached on success (commit)
+    Ok(())
+}
+<span class="boring">}</span></code></pre>
+<p>In C++, achieving the strong guarantee requires manual rollback or the copy-and-swap
+idiom. In Rust, <code>?</code> propagation gives you the strong guarantee by default for most code.</p>
+<h4 id="catch_unwind--rusts-equivalent-of-catch"><a class="header" href="#catch_unwind--rusts-equivalent-of-catch"><code>catch_unwind</code> — Rust’s equivalent of <code>catch(...)</code></a></h4>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::panic;
+
+// Catch a panic (like catch(...) in C++) — rarely needed
+let result = panic::catch_unwind(|| {
+    // Code that might panic
+    let v = vec![1, 2, 3];
+    v[10]  // Panics! (index out of bounds)
+});
+
+match result {
+    Ok(val) =&gt; println!("Got: {val}"),
+    Err(_) =&gt; eprintln!("Caught a panic — cleaned up"),
+}
+<span class="boring">}</span></code></pre>
+<h4 id="unwindsafe--marking-types-as-panic-safe"><a class="header" href="#unwindsafe--marking-types-as-panic-safe"><code>UnwindSafe</code> — marking types as panic-safe</a></h4>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use std::panic::UnwindSafe;
+
+// Types behind &amp;mut are NOT UnwindSafe by default — the panic may have
+// left them in a partially-modified state
+fn safe_execute&lt;F: FnOnce() + UnwindSafe&gt;(f: F) {
+    let _ = std::panic::catch_unwind(f);
+}
+
+// Use AssertUnwindSafe to override when you've audited the code:
+use std::panic::AssertUnwindSafe;
+let mut data = vec![1, 2, 3];
+let _ = std::panic::catch_unwind(AssertUnwindSafe(|| {
+    data.push(4);
+}));
+<span class="boring">}</span></code></pre>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>C++ Exception Pattern</th><th>Rust Equivalent</th></tr>
+</thead>
+<tbody>
+<tr><td><code>throw MyException()</code></td><td><code>return Err(MyError::...)</code> (preferred) or <code>panic!("...")</code></td></tr>
+<tr><td><code>try { } catch (const E&amp; e)</code></td><td><code>match result { Ok(v) =&gt; ..., Err(e) =&gt; ... }</code> or <code>?</code></td></tr>
+<tr><td><code>catch (...)</code></td><td><code>std::panic::catch_unwind(...)</code></td></tr>
+<tr><td><code>noexcept</code></td><td><code>-&gt; Result&lt;T, E&gt;</code> (errors are values, not exceptions)</td></tr>
+<tr><td>RAII cleanup in stack unwinding</td><td><code>Drop::drop()</code> runs during panic unwinding</td></tr>
+<tr><td><code>std::uncaught_exceptions()</code></td><td><code>std::thread::panicking()</code></td></tr>
+<tr><td><code>-fno-exceptions</code> compile flag</td><td><code>panic = "abort"</code> in <code>Cargo.toml</code> [profile]</td></tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p><strong>Bottom line</strong>: In Rust, most code uses <code>Result&lt;T, E&gt;</code> instead of exceptions,
+making error paths explicit and composable. <code>panic!</code> is reserved for bugs
+(like <code>assert!</code> failures), not routine errors. This means “exception safety”
+is largely a non-issue — the ownership system handles cleanup automatically.</p>
+</blockquote>
+<hr>
+<h2 id="c-to-rust-migration-patterns"><a class="header" href="#c-to-rust-migration-patterns">C++ to Rust Migration Patterns</a></h2>
+<h3 id="quick-reference-c--rust-idiom-map"><a class="header" href="#quick-reference-c--rust-idiom-map">Quick Reference: C++ → Rust Idiom Map</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th><strong>C++ Pattern</strong></th><th><strong>Rust Idiom</strong></th><th><strong>Notes</strong></th></tr>
+</thead>
+<tbody>
+<tr><td><code>class Derived : public Base</code></td><td><code>enum Variant { A {...}, B {...} }</code></td><td>Prefer enums for closed sets</td></tr>
+<tr><td><code>virtual void method() = 0</code></td><td><code>trait MyTrait { fn method(&amp;self); }</code></td><td>Use for open/extensible interfaces</td></tr>
+<tr><td><code>dynamic_cast&lt;Derived*&gt;(ptr)</code></td><td><code>match value { Variant::A(data) =&gt; ..., }</code></td><td>Exhaustive, no runtime failure</td></tr>
+<tr><td><code>vector&lt;unique_ptr&lt;Base&gt;&gt;</code></td><td><code>Vec&lt;Box&lt;dyn Trait&gt;&gt;</code></td><td>Only when genuinely polymorphic</td></tr>
+<tr><td><code>shared_ptr&lt;T&gt;</code></td><td><code>Rc&lt;T&gt;</code> or <code>Arc&lt;T&gt;</code></td><td>Prefer <code>Box&lt;T&gt;</code> or owned values first</td></tr>
+<tr><td><code>enable_shared_from_this&lt;T&gt;</code></td><td>Arena pattern (<code>Vec&lt;T&gt;</code> + indices)</td><td>Eliminates reference cycles entirely</td></tr>
+<tr><td><code>Base* m_pFramework</code> in every class</td><td><code>fn execute(&amp;mut self, ctx: &amp;mut Context)</code></td><td>Pass context, don’t store pointers</td></tr>
+<tr><td><code>try { } catch (...) { }</code></td><td><code>match result { Ok(v) =&gt; ..., Err(e) =&gt; ... }</code></td><td>Or use <code>?</code> for propagation</td></tr>
+<tr><td><code>std::optional&lt;T&gt;</code></td><td><code>Option&lt;T&gt;</code></td><td><code>match</code> required, can’t forget None</td></tr>
+<tr><td><code>const std::string&amp;</code> parameter</td><td><code>&amp;str</code> parameter</td><td>Accepts both <code>String</code> and <code>&amp;str</code></td></tr>
+<tr><td><code>enum class Foo { A, B, C }</code></td><td><code>enum Foo { A, B, C }</code></td><td>Rust enums can also carry data</td></tr>
+<tr><td><code>auto x = std::move(obj)</code></td><td><code>let x = obj;</code></td><td>Move is the default, no <code>std::move</code> needed</td></tr>
+<tr><td>CMake + make + lint</td><td><code>cargo build / test / clippy / fmt</code></td><td>One tool for everything</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="migration-strategy"><a class="header" href="#migration-strategy">Migration Strategy</a></h3>
+<ol>
+<li><strong>Start with data types</strong>: Translate structs and enums first — this forces you to think about ownership</li>
+<li><strong>Convert factories to enums</strong>: If a factory creates different derived types, it should probably be <code>enum</code> + <code>match</code></li>
+<li><strong>Convert god objects to composed structs</strong>: Group related fields into focused structs</li>
+<li><strong>Replace pointers with borrows</strong>: Convert <code>Base*</code> stored pointers to <code>&amp;'a T</code> lifetime-bounded borrows</li>
+<li><strong>Use <code>Box&lt;dyn Trait&gt;</code> sparingly</strong>: Only for plugin systems and test mocking</li>
+<li><strong>Let the compiler guide you</strong>: Rust’s error messages are excellent — read them carefully</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch17-4-logging-and-tracing-ecosystem.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="ch19-macros.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch17-4-logging-and-tracing-ecosystem.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="ch19-macros.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+        <script>
+            window.playground_line_numbers = true;
+        </script>
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+        <script src="ace-2a3cd908.js"></script>
+        <script src="mode-rust-2c9d5c9a.js"></script>
+        <script src="editor-16ca416c.js"></script>
+        <script src="theme-dawn-4493f9c8.js"></script>
+        <script src="theme-tomorrow_night-9dbe62a9.js"></script>
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="mermaid-35374ef1.min.js"></script>
+        <script src="mermaid-init-12acb6c2.js"></script>
+
+
+
+    </div>
+    </body>
+</html>
