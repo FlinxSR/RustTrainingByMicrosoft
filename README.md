@@ -1,3 +1,6 @@
+# Visit the site here: 
+https://flinxsr.github.io/TheRustTrainingBook
+
 # Rust Training (Public Mirror)
 
 This repository is a mirror of the original Microsoft Rust Training project.
